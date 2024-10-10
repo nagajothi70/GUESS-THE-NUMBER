@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the number</title>
+</head>
+<body>
+    <h2>Guess the number (1-20)</h2>
+    
+    <br><br>
+
+    
+   
+
+    <span id="ch"></span>
+    <div id="gs"></div>
+    <p id="info"></p> 
+    <p id="wl"></p>
+
+    <button type="submit" id="start">Start</button>
+
+<script>
+    let ch = 3
+    //Removing Start button
+    const btn = document.getElementById("start")
+    btn.addEventListener('click',function()
+    {
+        this.remove()
+        call()
+    })
+    
+    function random_number()
+    {
+        let num = Math.floor(Math.random()*20)
+        return num
+    }
+
+    function call()
+    {
+        document.getElementById('gs').innerHTML += '<br>'
+
+        let lab = document.createElement('label')
+        lab.innerHTML = "Enter the number:"
+        document.getElementById('gs').appendChild(lab)
+
+        let guess = document.createElement('input')
+        guess.type= "text"
+        guess.id = "input"
+        document.getElementById('gs').appendChild(guess)
+
+        document.getElementById('gs').innerHTML += '<br>'
+
+        let gbtn = document.createElement('button')
+        gbtn.id= "btn"
+        gbtn.innerHTML= "Correct ?"
+        document.getElementById('gs').appendChild(gbtn)
+        
+        gbtn.addEventListener('click',()=>
+        {
+            let red = ch--
+            document.getElementById('ch').innerHTML = "Remaining Chances:"+red
+            guessed = Number(document.getElementById('input').value)
+            random = random_number()
+            if(red !== 0)
+            {
+                if(random !== guessed)
+            {
+                if(random > guessed)
+                {
+                    document.getElementById('info').innerHTML = "Your Guess is Low"
+                }
+                else
+                {
+                    document.getElementById('info').innerHTML = "Your Guess is High"
+                }
+            }
+            else
+            {
+                document.getElementById('wl').innerHTML = "BETTER LUCK NEXT TIME"
+            }
+            }
+        })
+
+    }
+
+
+
+
+</script>
+</body>
+</html>
